@@ -3,7 +3,7 @@ import printWelcomeMessage from "./welcome/welcome.js";
 import { printPrompt } from "./prompt/prompt.js";
 import os from "os";
 
-function main() {
+const main = () => {
   printWelcomeMessage();
 
   process.chdir(os.homedir());
@@ -17,6 +17,6 @@ function main() {
   process.stdin.on("begin", () => printPrompt).on("data", app.execute);
 
   printPrompt();
-}
+};
 
 main();
