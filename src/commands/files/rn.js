@@ -7,8 +7,9 @@ export const rn = async (args) => {
   const pathArgs = getValidArgs(args);
   if (!Array.isArray(pathArgs)) {
     printInputError();
-    return;
+    return false;
   }
+
   const [oldPath, newPath] = pathArgs;
 
   const oldPathname = path.resolve(oldPath);
@@ -18,14 +19,14 @@ export const rn = async (args) => {
     try {
       await fs.access(newPathname, fs.constants.F_OK);
       printOperationError();
-      return;
+      return false;
     } catch {
       await fs.rename(oldPathname, newPathname);
-      return;
+      return [oldPathname.toString(), newPathname.toString()];
     }
   } catch {
     printOperationError();
-    return;
+    return false;
   }
 };
 

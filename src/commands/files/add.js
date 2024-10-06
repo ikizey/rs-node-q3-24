@@ -7,7 +7,7 @@ export const add = async (args) => {
   const pathname = getValidArg(args);
   if (!pathname) {
     printInputError();
-    return;
+    return false;
   }
 
   try {
@@ -15,14 +15,14 @@ export const add = async (args) => {
     try {
       await fs.access(pathname, fs.constants.F_OK);
       printOperationError();
-      return;
+      return false;
     } catch {
       await fs.writeFile(pathname, "");
-      return;
+      return pathname.toString();
     }
   } catch {
     printOperationError();
-    return;
+    return false;
   }
 };
 

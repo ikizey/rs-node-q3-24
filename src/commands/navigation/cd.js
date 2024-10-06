@@ -7,14 +7,16 @@ export const cd = async (args) => {
   const pathArg = getValidArg(args);
   if (!pathArg) {
     printInputError();
-    return;
+    return false;
   }
 
   const pathname = path.resolve(pathArg);
   try {
     process.chdir(pathname);
+    return pathname.toString();
   } catch {
     printOperationError();
+    return false;
   }
 };
 

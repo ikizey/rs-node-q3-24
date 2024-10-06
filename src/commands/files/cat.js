@@ -6,7 +6,7 @@ export const cat = async (args) => {
   const pathname = getValidArg(args);
   if (!pathname) {
     printInputError();
-    return;
+    return false;
   }
 
   return new Promise((resolve) => {
@@ -16,16 +16,16 @@ export const cat = async (args) => {
       readStream
         .on("error", () => {
           printOperationError();
-          resolve();
+          resolve(false);
         })
         .on("end", () => {
           readStream.close();
-          resolve();
+          resolve(true);
         })
         .pipe(process.stdout);
     } catch {
       printOperationError();
-      resolve();
+      resolve(false);
     }
   });
 };

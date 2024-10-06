@@ -8,7 +8,7 @@ export const cp = async (args) => {
   const pathArgs = getValidArgs(args);
   if (!Array.isArray(pathArgs)) {
     printInputError();
-    return;
+    return false;
   }
 
   try {
@@ -26,17 +26,17 @@ export const cp = async (args) => {
     try {
       await fs.access(destinationPathname, fs.constants.F_OK);
       printOperationError();
-      return;
+      return false;
     } catch {
       const readStream = createReadStream(sourcePathname);
       const writeStream = createWriteStream(destinationPathname);
 
       readStream.pipe(writeStream);
-      return;
+      return [sourcePathname, destinationPathname];
     }
   } catch {
     printOperationError();
-    return;
+    return false;
   }
 };
 
