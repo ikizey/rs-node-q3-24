@@ -1,9 +1,12 @@
 import * as app from "./commands/index.js";
 import printWelcomeMessage from "./welcome/welcome.js";
 import { printPrompt } from "./prompt/prompt.js";
+import os from "os";
 
 function main() {
   printWelcomeMessage();
+
+  process.chdir(os.homedir());
 
   process.on("SIGINT", () => {
     process.stdout.clearLine();
