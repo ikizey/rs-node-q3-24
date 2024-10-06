@@ -38,7 +38,7 @@ const printItems = (items, nameWidth, typeWidth) => {
     }`;
     const coloredType = item.isDirectory()
       ? `${color.blue}directory${color.reset}`
-      : `${color.yellow}file${color.reset}`;
+      : `${color.magenta}file${color.reset}`;
     console.log(`${coloredName} ${coloredType.padEnd(typeWidth)}`);
   });
 };
