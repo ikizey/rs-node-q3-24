@@ -3,8 +3,8 @@ import path from "node:path";
 import { printInputError } from "../../messages/inputError.js";
 import { printOperationError } from "../../messages/operationError.js";
 
-export const add = async (command) => {
-  const pathname = getValidArg(command);
+export const add = async (args) => {
+  const pathname = getValidArg(args);
   if (!pathname) {
     printInputError();
     return;
@@ -22,10 +22,9 @@ export const add = async (command) => {
   }
 };
 
-const getValidArg = (command) => {
-  const args = command.split(" ");
-  if (args.length !== 2 || !args[1]) {
+const getValidArg = (args) => {
+  if (args.length !== 1 || !args[0]) {
     return null;
   }
-  return args[1];
+  return args[0];
 };
