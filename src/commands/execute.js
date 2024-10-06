@@ -10,6 +10,7 @@ import { cp } from "./files/cp.js";
 import { rm } from "./files/rm.js";
 import { mv } from "./files/mv.js";
 import { hash } from "./hash/hash.js";
+import { os } from "./os/os.js";
 
 export const execute = async (data) => {
   const input = data.toString("utf-8").trim();
@@ -27,6 +28,7 @@ export const execute = async (data) => {
     ["cp", cp],
     ["rm", rm],
     ["mv", mv],
+    ["os", os],
     ["hash", hash],
   ]);
 
