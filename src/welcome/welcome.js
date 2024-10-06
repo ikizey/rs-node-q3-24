@@ -1,4 +1,4 @@
-import parseArgsValue from "./argv.js";
+import parseArgsValue from "../argv/argv.js";
 
 const printWelcomeMessage = () => {
   const username = parseArgsValue();
