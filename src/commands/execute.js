@@ -5,14 +5,11 @@ import { exit } from "./exit.js";
 export const execute = async (data) => {
   const command = data.toString("utf-8").trim();
 
-  switch (command) {
-    case ".exit":
+  if (command === ".exit") {
       exit();
-      break;
-case "ls":
+  } else if (command === "ls") {
       await ls();
-      break;
-    default:
+  } else {
       console.log(command);
   }
 
