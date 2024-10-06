@@ -4,17 +4,24 @@ import { printInputError } from "../messages/inputError.js";
 import { printOperationError } from "../messages/operationError.js";
 
 export const cd = async (command) => {
-  const args = command.split(" ");
-  if (args.length !== 2 || !args[1]) {
+  const pathArg = getValidArg(command);
+  if (!pathArg) {
     printInputError();
     return;
   }
-  const pathArg = args[1];
 
   const pathname = path.resolve(pathArg);
   try {
     process.chdir(pathname);
-  } catch (error) {
+  } catch {
     printOperationError();
   }
+};
+
+const getValidArg = (command) => {
+  const args = command.split(" ");
+  if (args.length !== 2 || !args[1]) {
+    return null;
+  }
+  return args[1];
 };
