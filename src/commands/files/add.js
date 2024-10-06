@@ -14,11 +14,15 @@ export const add = async (args) => {
     await fs.mkdir(path.dirname(pathname), { recursive: true });
     try {
       await fs.access(pathname, fs.constants.F_OK);
+      printOperationError();
+      return;
     } catch {
       await fs.writeFile(pathname, "");
+      return;
     }
   } catch {
     printOperationError();
+    return;
   }
 };
 
