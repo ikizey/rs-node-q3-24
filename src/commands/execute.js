@@ -1,8 +1,8 @@
-import { ls } from "./ls.js";
+import { ls } from "./navigation/ls.js";
 import { printPrompt } from "../prompt/prompt.js";
 import { exit } from "./exit.js";
 import { printInputError } from "../messages/inputError.js";
-import { cd } from "./cd.js";
+import { cd } from "./navigation/cd.js";
 
 export const execute = async (data) => {
   const command = data.toString("utf-8").trim();

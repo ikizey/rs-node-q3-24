@@ -1,5 +1,5 @@
 import fs from "fs/promises";
-import { color } from "../colors/colors.js";
+import { color } from "../../colors/colors.js";
 
 export const ls = async () => {
   const currentDir = process.cwd();
