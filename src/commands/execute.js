@@ -4,6 +4,7 @@ import { exit } from "./exit.js";
 import { printInputError } from "../messages/inputError.js";
 import { cd } from "./navigation/cd.js";
 import { cat } from "./files/cat.js";
+import { add } from "./files/add.js";
 
 export const execute = async (data) => {
   const command = data.toString("utf-8").trim();
@@ -18,6 +19,8 @@ export const execute = async (data) => {
     await ls();
   } else if (command.startsWith("cat ")) {
     await cat(command);
+  } else if (command.startsWith("add ")) {
+    await add(command);
   } else {
     printInputError();
   }
