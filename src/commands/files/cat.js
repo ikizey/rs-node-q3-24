@@ -1,4 +1,4 @@
-import fs from "node:fs";
+import { createReadStream } from "node:fs";
 import { printOperationError } from "../../messages/operationError.js";
 import { printInputError } from "../../messages/inputError.js";
 
@@ -11,7 +11,7 @@ export const cat = async (args) => {
 
   return new Promise((resolve) => {
     try {
-      const readStream = fs.createReadStream(pathname, "utf-8");
+      const readStream = createReadStream(pathname, "utf-8");
 
       readStream
         .on("error", () => {
