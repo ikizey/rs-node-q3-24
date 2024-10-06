@@ -11,6 +11,8 @@ export const execute = async (data) => {
     exit();
   } else if (command.startsWith("cd ")) {
     await cd(command);
+  } else if (command === "up") {
+    await cd("cd ..");
   } else if (command === "ls") {
     await ls();
   } else {
