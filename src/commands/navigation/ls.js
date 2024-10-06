@@ -1,18 +1,25 @@
 import fs from "fs/promises";
 import { color } from "../../colors/colors.js";
+import { printOperationError } from "../../messages/operationError.js";
 
 export const ls = async () => {
   const currentDir = process.cwd();
-  const items = await fs.readdir(currentDir, { withFileTypes: true });
+  try {
+    const items = await fs.readdir(currentDir, { withFileTypes: true });
 
-  items.sort(sortItems);
+    items.sort(sortItems);
 
-  const nameWidth = getMaxNameLength(items);
-  const typeWidth = "directory".length;
+    const nameWidth = getMaxNameLength(items);
+    const typeWidth = "directory".length;
 
-  printHeader(nameWidth, typeWidth);
+    printHeader(nameWidth, typeWidth);
 
-  printItems(items, nameWidth, typeWidth);
+    printItems(items, nameWidth, typeWidth);
+    return items.length;
+  } catch {
+    printOperationError();
+    return false;
+  }
 };
 
 const sortItems = (a, b) => {
