@@ -5,6 +5,7 @@ import { printInputError } from "../messages/inputError.js";
 import { cd } from "./navigation/cd.js";
 import { cat } from "./files/cat.js";
 import { add } from "./files/add.js";
+import { rn } from "./files/rn.js";
 
 export const execute = async (data) => {
   const input = data.toString("utf-8").trim();
@@ -18,6 +19,7 @@ export const execute = async (data) => {
     ["ls", ls],
     ["cat", cat],
     ["add", add],
+    ["rn", rn],
   ]);
 
   if (commands.has(command)) {
