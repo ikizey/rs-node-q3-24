@@ -11,6 +11,8 @@ function main() {
     app.exit();
   });
 
+  process.stdin.on("begin", () => printPrompt).on("data", app.execute);
+
   printPrompt();
 }
 
