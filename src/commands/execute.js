@@ -9,6 +9,7 @@ import { rn } from "./files/rn.js";
 import { cp } from "./files/cp.js";
 import { rm } from "./files/rm.js";
 import { mv } from "./files/mv.js";
+import { hash } from "./hash/hash.js";
 
 export const execute = async (data) => {
   const input = data.toString("utf-8").trim();
@@ -26,6 +27,7 @@ export const execute = async (data) => {
     ["cp", cp],
     ["rm", rm],
     ["mv", mv],
+    ["hash", hash],
   ]);
 
   if (commands.has(command)) {
