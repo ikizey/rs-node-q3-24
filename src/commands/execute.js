@@ -7,6 +7,7 @@ import { cat } from "./files/cat.js";
 import { add } from "./files/add.js";
 import { rn } from "./files/rn.js";
 import { cp } from "./files/cp.js";
+import { rm } from "./files/rm.js";
 
 export const execute = async (data) => {
   const input = data.toString("utf-8").trim();
@@ -22,6 +23,7 @@ export const execute = async (data) => {
     ["add", add],
     ["rn", rn],
     ["cp", cp],
+    ["rm", rm],
   ]);
 
   if (commands.has(command)) {
