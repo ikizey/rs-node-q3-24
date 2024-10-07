@@ -23,6 +23,7 @@ export const execute = async (data) => {
     ["cd", cd],
     ["up", () => cd([".."])],
     ["ls", ls],
+    ["ll", ls],
     ["cat", cat],
     ["add", add],
     ["rn", rn],
