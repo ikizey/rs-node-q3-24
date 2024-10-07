@@ -11,8 +11,7 @@ import { rm } from "./files/rm.js";
 import { mv } from "./files/mv.js";
 import { hash } from "./hash/hash.js";
 import { os } from "./os/os.js";
-import { compress } from "./compression/compress.js";
-import { decompress } from "./compression/decompress.js";
+import { brotli } from "./compression/brotli.js";
 
 export const execute = async (data) => {
   const input = data.toString("utf-8").trim();
@@ -32,8 +31,8 @@ export const execute = async (data) => {
     ["mv", mv],
     ["os", os],
     ["hash", hash],
-    ["compress", compress],
-    ["decompress", decompress],
+    ["compress", (args) => brotli(["compress", ...args])],
+    ["decompress", (args) => brotli(["decompress", ...args])],
   ]);
 
   if (commands.has(command)) {

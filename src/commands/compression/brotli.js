@@ -1,13 +1,15 @@
 import fs from "node:fs/promises";
 import { createReadStream, createWriteStream } from "node:fs";
-import { createBrotliCompress } from "node:zlib";
+import { createBrotliDecompress, createBrotliCompress } from "node:zlib";
 import { pipeline } from "node:stream";
 import { printInputError } from "../../messages/inputError.js";
 import { printOperationError } from "../../messages/operationError.js";
 import path from "node:path";
 
-export const compress = (args) => {
-  const pathArgs = getValidArgs(args);
+export const brotli = (args) => {
+  const [systemArg, ...inputArgs] = args;
+
+  const pathArgs = getValidArgs(inputArgs);
   if (!Array.isArray(pathArgs)) {
     printInputError();
     return false;
@@ -25,11 +27,11 @@ export const compress = (args) => {
         printOperationError();
         resolve(false);
       } catch {
-        const brotliCompress = createBrotliCompress();
+        const brotli = systemArg === "compress" ? createBrotliCompress() : createBrotliDecompress();
         const readStream = createReadStream(sourcePathname);
         const writeStream = createWriteStream(destinationPathname);
 
-        pipeline(readStream, brotliCompress, writeStream, (err) => {
+        pipeline(readStream, brotli, writeStream, (err) => {
           if (err) {
             printOperationError();
             resolve(false);
@@ -39,7 +41,6 @@ export const compress = (args) => {
         });
       }
     } catch (error) {
-      console.log(error);
       printOperationError();
       resolve(false);
     }
