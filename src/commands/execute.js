@@ -11,6 +11,7 @@ import { rm } from "./files/rm.js";
 import { mv } from "./files/mv.js";
 import { hash } from "./hash/hash.js";
 import { os } from "./os/os.js";
+import { compress } from "./compression/compress.js";
 
 export const execute = async (data) => {
   const input = data.toString("utf-8").trim();
@@ -30,6 +31,7 @@ export const execute = async (data) => {
     ["mv", mv],
     ["os", os],
     ["hash", hash],
+    ["compress", compress],
   ]);
 
   if (commands.has(command)) {
