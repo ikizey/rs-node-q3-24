@@ -62,6 +62,41 @@ export const router = (req: IncomingMessage, res: ServerResponse) => {
     return;
   }
 
+  if (req.method === "PUT" && /^\/api\/users\/[^\/]+$/.test(req.url ?? "")) {
+    const userId = req.url?.split("/").pop() as string;
+
+    if (!uuidValidate(userId)) {
+      res.writeHead(400, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ error: "Invalid User ID format" }));
+      return;
+    }
+
+    let body = "";
+    req.on("data", (chunk) => {
+      body += chunk.toString();
+    });
+    req.on("end", () => {
+      try {
+        const userData: UserData = JSON.parse(body);
+        const result = db.updateUser(userId, userData);
+        if (result.status === "success") {
+          res.writeHead(200, { "Content-Type": "application/json" });
+          res.end(JSON.stringify(result.user));
+          return;
+        } else {
+          res.writeHead(404, { "Content-Type": "application/json" });
+          res.end(JSON.stringify({ error: "User not found" }));
+          return;
+        }
+      } catch (error) {
+        res.writeHead(400, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: "Invalid request body" }));
+        return;
+      }
+    });
+    return;
+  }
+
   res.writeHead(404, { "Content-Type": "application/json" });
   res.end(JSON.stringify({ error: `${req.url} Page Not Found` }));
   return;
