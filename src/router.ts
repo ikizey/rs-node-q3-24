@@ -97,6 +97,26 @@ export const router = (req: IncomingMessage, res: ServerResponse) => {
     return;
   }
 
+  if (req.method === "DELETE" && /^\/api\/users\/[^\/]+$/.test(req.url ?? "")) {
+    const userId = req.url?.split("/").pop() as string;
+
+    if (!uuidValidate(userId)) {
+      res.writeHead(400, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ error: "Invalid User ID format" }));
+      return;
+    }
+
+    const result = db.deleteUser(userId);
+    if (result.status === "success") {
+      res.writeHead(204);
+      res.end();
+    } else {
+      res.writeHead(404, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ error: "User not found" }));
+    }
+    return;
+  }
+
   res.writeHead(404, { "Content-Type": "application/json" });
   res.end(JSON.stringify({ error: `${req.url} Page Not Found` }));
   return;
