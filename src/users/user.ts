@@ -23,12 +23,12 @@ const validateUsername = (username?: unknown) => {
 
 const validateAge = (age?: unknown) => {
   if (
-    typeof age === "string" &&
+    typeof age === "number" &&
     Number.isFinite(age) &&
     Number.isSafeInteger(age) &&
-    Number(age) > 0
+    age > 0
   ) {
-    return { isValid: true, age: Number(age) };
+    return { isValid: true, age: age };
   }
 
   return { isValid: false, age: null };
