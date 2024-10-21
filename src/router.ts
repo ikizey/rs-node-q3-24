@@ -12,7 +12,11 @@ export const router = (req: IncomingMessage, res: ServerResponse) => {
       return;
     } else {
       res.writeHead(500, { "Content-Type": "application/json" });
-      res.end(JSON.stringify({ error: "Internal Server Error" }));
+      res.end(
+        JSON.stringify({
+          error: "An unexpected error occurred. Please try again later.",
+        })
+      );
       return;
     }
   }
@@ -57,8 +61,12 @@ export const router = (req: IncomingMessage, res: ServerResponse) => {
           return;
         }
       } catch (error) {
-        res.writeHead(400, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ error: "Invalid request body" }));
+        res.writeHead(500, { "Content-Type": "application/json" });
+        res.end(
+          JSON.stringify({
+            error: "An unexpected error occurred. Please try again later.",
+          })
+        );
         return;
       }
     });
@@ -92,8 +100,12 @@ export const router = (req: IncomingMessage, res: ServerResponse) => {
           return;
         }
       } catch (error) {
-        res.writeHead(400, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ error: "Invalid request body" }));
+        res.writeHead(500, { "Content-Type": "application/json" });
+        res.end(
+          JSON.stringify({
+            error: "An unexpected error occurred. Please try again later.",
+          })
+        );
         return;
       }
     });
