@@ -2,10 +2,8 @@
   "name": "basic-testing",
   "version": "1.0.0",
   "description": "Task for mastering unit-tests with Jest, Node.js and Typescript",
-  "author": "AlreadyBored",
-  "license": "MIT",
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=22.9.0"
   },
   "scripts": {
     "format": "prettier --write \"src/**/*.ts\"",
