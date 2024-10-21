@@ -49,14 +49,17 @@ export const router = (req: IncomingMessage, res: ServerResponse) => {
         const result = db.addUser(userData);
         if (result.status === "success") {
           res.writeHead(201);
-          res.end();
+          res.end(JSON.stringify(result.user));
+          return;
         } else {
           res.writeHead(400, { "Content-Type": "application/json" });
           res.end(JSON.stringify({ error: "Invalid request body" }));
+          return;
         }
       } catch (error) {
         res.writeHead(400, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ error: "Invalid request body" }));
+        return;
       }
     });
     return;
@@ -110,11 +113,12 @@ export const router = (req: IncomingMessage, res: ServerResponse) => {
     if (result.status === "success") {
       res.writeHead(204);
       res.end();
+      return;
     } else {
       res.writeHead(404, { "Content-Type": "application/json" });
       res.end(JSON.stringify({ error: "User not found" }));
+      return;
     }
-    return;
   }
 
   res.writeHead(404, { "Content-Type": "application/json" });
