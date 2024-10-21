@@ -1,6 +1,7 @@
 import { db } from "./db/db";
 import { type IncomingMessage, type ServerResponse } from "node:http";
 import { validate as uuidValidate } from "uuid";
+import { type UserData } from "./users/user";
 
 export const router = (req: IncomingMessage, res: ServerResponse) => {
   if (req.method === "GET" && req.url === "/api/users") {
@@ -34,6 +35,30 @@ export const router = (req: IncomingMessage, res: ServerResponse) => {
 
     res.writeHead(200, { "Content-Type": "application/json" });
     res.end(JSON.stringify(result.user));
+    return;
+  }
+
+  if (req.method === "POST" && req.url === "/api/users") {
+    let body = "";
+    req.on("data", (chunk) => {
+      body += chunk.toString();
+    });
+    req.on("end", () => {
+      try {
+        const userData: UserData = JSON.parse(body);
+        const result = db.addUser(userData);
+        if (result.status === "success") {
+          res.writeHead(201);
+          res.end();
+        } else {
+          res.writeHead(400, { "Content-Type": "application/json" });
+          res.end(JSON.stringify({ error: "Invalid request body" }));
+        }
+      } catch (error) {
+        res.writeHead(400, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: "Invalid request body" }));
+      }
+    });
     return;
   }
 
