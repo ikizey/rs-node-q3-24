@@ -1,0 +1,36 @@
+{
+  "name": "ws_task",
+  "version": "1.0.0",
+  "description": "WebSocket battleship server",
+  "main": "dist/index.js",
+  "type": "module",
+  "engines": {
+    "node": ">=23.1.0"
+  },
+  "scripts": {
+    "start:dev": "nodemon",
+    "build": "tsc",
+    "start:prod": "node dist/src/index.js",
+    "lint": "eslint \"src/**/*.ts\" --fix",
+    "format": "prettier --write .",
+    "test": "echo \"Testing not implemented\" && exit 1"
+  },
+  "keywords": [],
+  "devDependencies": {
+    "@types/node": "^22.8.1",
+    "@types/ws": "^8.5.12",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
+    "dotenv": "^16.4.5",
+    "eslint": "^8.38.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "nodemon": "^3.1.7",
+    "prettier": "^3.3.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}
