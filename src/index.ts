@@ -30,8 +30,6 @@ wsServer.on("connection", (websocket) => {
   const ws: Ws = websocket as Ws;
   ws.on("message", (message, isBinary) => {
     const { type, data } = decodeMessage(message as Buffer);
-    console.log("incoming message type", type);
-    console.log("incoming message data", data);
 
     if (type === "reg") {
       const user = addUser(data.name, data.password, ws);
