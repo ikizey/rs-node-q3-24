@@ -41,7 +41,7 @@ export const createGame = (roomId: number) => {
     currentPlayerIndex: Math.random() > 0.5 ? 0 : 1,
   };
   games.set(game.gameId, game);
-  // removeRoom(roomId);
+  removeRoom(roomId);
   return game;
 };
 

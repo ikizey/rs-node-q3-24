@@ -15,10 +15,6 @@ const nextUserIndex = () => {
   return userIndex;
 };
 
-const getUserIndex = () => {
-  return userIndex;
-};
-
 export const users: Map<number, User> = new Map();
 
 export const addUser = (name: string, password: string, ws: WebSocket) => {
