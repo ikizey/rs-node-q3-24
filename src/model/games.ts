@@ -187,9 +187,6 @@ export const attack = (data: AttackData): AttackResult => {
   }
   const currentPlayerIndex = getCurrentPlayerIndex(data.gameId);
   if (currentPlayerIndex !== data.indexPlayer) {
-    console.log(
-      `player ${data.indexPlayer} is not current player, current player is ${currentPlayerIndex}`,
-    );
     return null;
   }
   const enemyPlayer = enemy(game, data.indexPlayer);
