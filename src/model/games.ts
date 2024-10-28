@@ -223,6 +223,15 @@ export const attack = (data: AttackData): AttackResult => {
     game.players[winner].user.wins += 1;
   }
 
+  const killData = getShipKillData(enemyBoard, data.x, data.y);
+  if (killData.length > 0) {
+    return {
+      attackStatus: "killed",
+      winner,
+      data: killData,
+    };
+  }
+
   return {
     attackStatus: "shot",
     winner,
@@ -275,4 +284,70 @@ export const randomAttack = (data: RandomAttackData) => {
 const isGameFinished = (currentEnemyBoard: Board) => {
   const shipCells = currentEnemyBoard.filter((cell) => cell.ship);
   return shipCells.every((cell) => cell.attacked);
+};
+
+type AttackCellData = {
+  status: AttackStatus;
+  position: {
+    x: number;
+    y: number;
+  };
+};
+
+const getShipKillData = (
+  board: Board,
+  x: number,
+  y: number,
+): AttackCellData[] => {
+  const result: AttackCellData[] = [];
+  const killedCells: Cell[] = [];
+  const surroundingCells: { x: number; y: number }[] = [];
+
+  // Find all connected ship cells
+  const findConnectedShipCells = (cellX: number, cellY: number) => {
+    const cell = board.find((c) => c.x === cellX && c.y === cellY);
+    if (cell && cell.ship && !killedCells.includes(cell)) {
+      killedCells.push(cell);
+      findConnectedShipCells(cellX + 1, cellY);
+      findConnectedShipCells(cellX - 1, cellY);
+      findConnectedShipCells(cellX, cellY + 1);
+      findConnectedShipCells(cellX, cellY - 1);
+    }
+  };
+
+  findConnectedShipCells(x, y);
+
+  const isShipKilled =
+    killedCells.length > 0 && killedCells.every((cell) => cell.attacked);
+
+  if (isShipKilled) {
+    killedCells.forEach((cell) => {
+      result.push({
+        status: "killed",
+        position: { x: cell.x, y: cell.y },
+      });
+
+      for (let dx = -1; dx <= 1; dx++) {
+        for (let dy = -1; dy <= 1; dy++) {
+          const sx = cell.x + dx;
+          const sy = cell.y + dy;
+
+          if (board.some((c) => c.ship && c.x === sx && c.y === sy)) continue;
+
+          if (!surroundingCells.some((pos) => pos.x === sx && pos.y === sy)) {
+            surroundingCells.push({ x: sx, y: sy });
+          }
+        }
+      }
+    });
+
+    surroundingCells.forEach((pos) => {
+      result.push({
+        status: "miss",
+        position: pos,
+      });
+    });
+  }
+
+  return result;
 };
