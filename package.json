@@ -10,7 +10,7 @@
   "scripts": {
     "start:dev": "nodemon",
     "build": "tsc",
-    "start:prod": "node dist/index.js",
+    "start:prod": "node dist/src/index.js",
     "lint": "eslint \"src/**/*.ts\" --fix",
     "format": "prettier --write .",
     "test": "echo \"Testing not implemented\" && exit 1"
