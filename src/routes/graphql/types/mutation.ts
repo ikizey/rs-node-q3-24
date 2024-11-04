@@ -68,7 +68,7 @@ export const mutation = new GraphQLObjectType<unknown, Context>({
         return 'Resolve';
       },
     },
-  
+
     createPost: {
       type: new GraphQLNonNull(postType),
       args: {

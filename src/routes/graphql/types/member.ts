@@ -23,6 +23,3 @@ export const memberType = new GraphQLObjectType({
     postsLimitPerMonth: { type: new GraphQLNonNull(GraphQLInt) },
   }),
 });
-
-
-
