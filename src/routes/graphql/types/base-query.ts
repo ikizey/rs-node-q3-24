@@ -11,7 +11,7 @@ type Id = {
 };
 
 export const baseQueryType = new GraphQLObjectType<unknown, Context>({
-  name: 'baseQueryType',
+  name: 'BaseQueryType',
   fields: {
     memberTypes: {
       type: new GraphQLNonNull(new GraphQLList(new GraphQLNonNull(memberType))),
