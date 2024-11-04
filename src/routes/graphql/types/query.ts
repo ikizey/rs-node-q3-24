@@ -4,11 +4,7 @@ import { userType } from './user.js';
 import { postType } from './post.js';
 import { profileType } from './profile.js';
 import { UUIDType } from './uuid.js';
-import { Context } from './shared.js';
-
-type Id = {
-  id: string;
-};
+import { Context, Id } from './shared.js';
 
 export const query = new GraphQLObjectType<unknown, Context>({
   name: 'QueryType',

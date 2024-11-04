@@ -13,3 +13,7 @@ export type Context = FastifyInstance<
   FastifyBaseLogger,
   TypeBoxTypeProvider
 >;
+
+export type Id = {
+  id: string;
+};
