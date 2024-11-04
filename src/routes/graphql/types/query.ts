@@ -10,8 +10,8 @@ type Id = {
   id: string;
 };
 
-export const baseQueryType = new GraphQLObjectType<unknown, Context>({
-  name: 'BaseQueryType',
+export const query = new GraphQLObjectType<unknown, Context>({
+  name: 'QueryType',
   fields: {
     memberTypes: {
       type: new GraphQLNonNull(new GraphQLList(new GraphQLNonNull(memberType))),
