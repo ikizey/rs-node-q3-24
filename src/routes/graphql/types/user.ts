@@ -17,7 +17,7 @@ type Source = {
 };
 
 export const userType = new GraphQLObjectType<Source, Context>({
-  name: 'userType',
+  name: 'UserType',
   fields: () => ({
     id: { type: new GraphQLNonNull(UUIDType) },
     name: { type: new GraphQLNonNull(GraphQLString) },

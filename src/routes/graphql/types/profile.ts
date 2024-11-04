@@ -12,7 +12,7 @@ type Source = {
 };
 
 export const profileType = new GraphQLObjectType<Source, Context>({
-  name: 'profileType',
+  name: 'ProfileType',
   fields: () => ({
     id: { type: new GraphQLNonNull(UUIDType) },
     isMale: { type: new GraphQLNonNull(GraphQLBoolean) },
