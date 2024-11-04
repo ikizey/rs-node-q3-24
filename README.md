@@ -2,12 +2,12 @@
 
 Steps to get started:
 
+0. Switch to branch: `git switch graphql`
 1. Install dependencies: `npm ci`
 2. Create .env file (based on .env.example): ./.env
-3. Create db file: ./prisma/database.db
-4. Apply pending migrations: `npx prisma migrate deploy`
-5. Seed db: `npx prisma db seed`
-6. Start server: `npm run start`
+3. Apply pending migrations: `npx prisma migrate deploy`
+4. Seed db: `npx prisma db seed`
+5. Start server: `npm run start`
 
 Tests:
 
